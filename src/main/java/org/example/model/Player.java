@@ -3,8 +3,6 @@ package org.example.model;
 /**
  * Clase destinada a representar el modelo para las instancias de los jugadores
  * dentro del ranking.
- * No se incluye un constructor con el parámetro id dado que este lo va a manejar de manera
- * autoincremental la propia base de datos.
  */
 public class Player {
 
@@ -19,6 +17,21 @@ public class Player {
     public Player(String name, int score) {
         this.name = name;
         this.score = score;
+    }
+
+    public Player(int id, String name, int score) {
+        this.id = id;
+        this.name = name;
+        this.score = score;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + " - Score: " + this.score;
+    }
+
+    public void addPoints(int points){
+        this.score += points;
     }
 
     public int getId() {

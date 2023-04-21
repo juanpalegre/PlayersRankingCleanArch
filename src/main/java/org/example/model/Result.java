@@ -7,6 +7,7 @@ package org.example.model;
  */
 public class Result {
 
+    private int id;
     private Player winner;
     private Player loser;
 
@@ -14,7 +15,8 @@ public class Result {
 
     }
 
-    public Result(Player winner, Player losser) {
+    public Result(int id, Player winner, Player losser) {
+        this.id = id;
         this.winner = winner;
         this.loser = losser;
     }
@@ -33,5 +35,13 @@ public class Result {
 
     public void setLoser(Player loser) {
         this.loser = loser;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
