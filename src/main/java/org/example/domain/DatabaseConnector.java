@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase que se encarga de manejar la conexión con la base de datos a partir de JDBC
+ */
 public class DatabaseConnector {
 
     public static Connection obtenerConexion(){

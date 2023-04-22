@@ -1,10 +1,14 @@
 package org.example.domain;
 
+import org.example.application.PlayerMapper;
 import org.example.model.Player;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Clase que implementa PlayerRepository y se encarga de interactuar con la base de datos a través de JDBC.
+ */
 
 public class PlayerRepoImpl implements PlayerRepository{
     @Override
@@ -15,6 +19,25 @@ public class PlayerRepoImpl implements PlayerRepository{
         statement.execute(sql);
         statement.close();
         connection.close();
+    }
+
+    @Override
+    public Player getPlayerById(int playerId) {
+        String sql = "SELECT * FROM players WHERE id = ?";
+        Player player = null;
+
+        try (Connection connection = DatabaseConnector.obtenerConexion();
+             PreparedStatement statement = connection.prepareStatement(sql)) {
+             statement.setInt(1, playerId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    player = PlayerMapper.mapRow(resultSet);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return player;
     }
 
     @Override
